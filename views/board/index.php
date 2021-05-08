@@ -43,7 +43,7 @@ use yii\widgets\Pjax;
                 <div class="body-message row">
                     <?= $post->text ?>
                 </div>
-            </div class="col-md-8">
+            </div>
             <div class="col-md-2"></div>
         </div>
     <?php

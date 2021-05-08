@@ -29,5 +29,4 @@ class BoardController extends Controller
             return $this->actionIndex();
         }
     }
-
 }
