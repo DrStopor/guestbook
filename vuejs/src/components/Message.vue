@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row" v-for="message of messages" :key="message.id">
-      <div class="col-md-8 test1 offset-md-2">
+      <div class="col-md-8 baseBlock offset-md-2">
         <div class="header-message row">
           <div class="theme">
             <b>Тема:</b> {{ message.theme }}

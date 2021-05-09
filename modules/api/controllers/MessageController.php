@@ -4,13 +4,11 @@ namespace app\modules\api\controllers;
 
 use app\models\Message;
 use app\modules\api\resource\MessageResource;
-use yii\base\BaseObject;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
-use yii\rest\Controller;
 
 class MessageController extends ActiveController
 {

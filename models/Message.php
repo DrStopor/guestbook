@@ -47,13 +47,13 @@ class Message extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text', 'user_name'], 'required'],
-            [['text'], 'string', 'min' => 3],
+            [['text'] , 'required'],
+            [['text'], 'string', 'min' => 3, 'max' => 1000],
             [['id_user'], 'integer'],
             [['created_time', 'last_edit'], 'safe'],
             [['created_at', 'created_by', 'updated_at'], 'integer'],
-            [['theme'], 'string', 'max' => 128],
-            [['user_name'], 'string', 'max' => 255],
+            [['theme'], 'string', 'max' => 64],
+            [['user_name', 'user_name'], 'string', 'max' => 64],
         ];
     }
 

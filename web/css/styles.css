@@ -1,19 +1,21 @@
-.test1 {
+.baseBlock {
     border: 0px;
     border-radius: 12px;
     background: rgb(5,180,172);
-    background: linear-gradient(0deg, rgba(245,245,245, 0.83) 0%, rgb(1, 77, 142) 100%);
+    background: linear-gradient(0deg, rgba(245,245,245, 0.83) 0%, rgb(0, 88, 161) 100%);
     margin: 15px;
+    font-size: 0.9rem;
 }
-.test1 .header-message {
+.baseBlock .header-message {
     display: flex;
     justify-content: space-between;
     margin: 10px 0px 5px 0px;
     padding: 0px;
 }
 
-.test1 .theme {
-    width: 175px;
+.baseBlock .theme {
+    width: 42rem;
+    overflow: hidden;
     border: 0px;
     border-radius: 5px;
     padding: 5px;
@@ -32,8 +34,9 @@
     margin-left: 4px;
 }
 
-.test1 .author{
-    width: 280px;
+.baseBlock .author{
+    width: 42rem;
+    overflow: hidden;
     border: 0px;
     border-radius: 5px;
     padding: 5px;
@@ -45,26 +48,28 @@
     align-items: center;
 }
 
-.test1 .footer-message .time{
-    width: 40%;
+.baseBlock .footer-message .time{
+    width: 10rem;
     border: 0px;
     border-radius: 5px;
     padding: 5px;
-    background: rgb(245,245,245);
-    background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(218,218,218,1) 100%);
+    /*background: rgb(245,245,245);
+    background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(218,218,218,1) 100%);*/
     margin: 0px 5px 10px 5px;
     box-shadow: 0 0 2px 2px #e2e2e2;
-    font-size: 0.8em;
     display: flex;
     align-items: center;
+    font-size: 0.6rem;
+    float: right;
 }
 
 .body-message {
     margin: 15px 5px 15px 5px;
     padding: 12px;
-    background: rgb(245,245,245);
+    background: rgb(252, 252, 252);
     border-radius: 7px;
     box-shadow: 0 0 2px 2px #e2e2e2;
     display: flex;
     align-items: center;
+    font-size: 1.1rem;
 }
