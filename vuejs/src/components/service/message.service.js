@@ -37,6 +37,9 @@ const messagesService = {
      */
     getAllMessage() {
         return httpClient.get(`${API_ENDPOINT}api/message/all`);
+    },
+    deleteMessage(id) {
+        return httpClient.delete(`${API_ENDPOINT}api/message/${id}`);
     }
 };
 

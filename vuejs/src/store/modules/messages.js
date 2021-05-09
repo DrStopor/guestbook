@@ -31,13 +31,33 @@ export default {
             ctx.commit('setPageCount', data);
         },
         /**
-         * Дергаем значение,
-         * в теории могло помочь для перезагрузки компонента. По факту не помогло (либо не корректно реализовано)
+         * Удаление сообщения по ID и пересборка сообщений на текущей странице
+         * @param ctx
+         * @param id
+         * @returns {Promise<void>}
+         */
+        async delete(ctx, id) {
+            await messageService.deleteMessage(id);
+            const {data} = await messageService.get(ctx.state.page);
+            ctx.commit('updateMessages', data);
+        },
+        /**
+         * Запись страницы в state.page
+         * @param ctx
+         * @param page
+         * @returns {Promise<void>}
+         */
+        async storePage(ctx, page) {
+            ctx.commit('changeStorePage', page);
+        },
+        /**
+         * Обновление сообщений на текущей странице
          * @param ctx
          * @returns {Promise<void>}
          */
-        async pokeWatchKey(ctx) {
-            ctx.commit('incrementWatchKey');
+        async justUpdateMessages(ctx) {
+            const {data} = await messageService.get(ctx.state.page);
+            ctx.commit('updateMessages', data);
         }
     },
     mutations: {
@@ -66,16 +86,16 @@ export default {
             state.pageCount = pages;
         },
         /**
-         * Увеличение значения watchKey
+         * Изменение значения state.page
          * @param state
+         * @param page
          */
-        incrementWatchKey (state) {
-            state.watchKey++;
+        changeStorePage(state, page) {
+            state.page = page;
         }
     },
     state: {
         messages: [],
-        watchKey: 0,
         pageCount: 1,
         page: 1,
     },
@@ -86,8 +106,8 @@ export default {
         pageCount(state) {
             return state.pageCount;
         },
-        watchKey(state) {
-            return state.watchKey;
+        page(state) {
+            return state.page;
         }
     }
 }

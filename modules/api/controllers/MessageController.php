@@ -36,7 +36,7 @@ class MessageController extends ActiveController
      */
     public function actionGetByPage($page = 0, $limitMessage = 3)
     {
-        $model= Message::find()->select(['theme', 'user_name', 'text', 'created_time'])->offset($page*$limitMessage)->limit($limitMessage)->all();
+        $model= Message::find()->select(['id', 'theme', 'user_name', 'text', 'created_time'])->offset($page*$limitMessage)->limit($limitMessage)->all();
 
         return $model;
     }

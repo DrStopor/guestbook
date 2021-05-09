@@ -14,6 +14,11 @@
           {{ message.text }}
         </div>
         <div class="footer-message">
+          <div class="delete">
+            <span class="btn btn-secondary" title="удалить сообщение" @click="deleteMessage(message.id)">
+              X
+            </span>
+          </div>
           <div class="time">
             <b>Время:</b> {{ message.created_time }}
           </div>
@@ -31,10 +36,11 @@ export default {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    deleteMessage(id) {
+      this.$emit('deleteMessage', id);
+    }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

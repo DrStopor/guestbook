@@ -89,6 +89,7 @@ export default {
         const {status, data} = await messageService.create(this.theme, this.user_name, this.text);
         if (status === 200 && data.message === 'success') {
           $event.target.reset();
+          this.$emit('addedMessage');
         }
       } catch (e) {
         console.log(e.response);

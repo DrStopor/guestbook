@@ -1,7 +1,14 @@
 <template>
   <div class="container">
+    <div class="row">
+      <div class="col-md-10 text-center offset-1">
+        <h2>Лучше писать на виртуальной стене, чем на заборе</h2>
+        <h4>Напиши, что думаешь <span class="text-to-small">(форма отправки сообщения внизу страницы)</span></h4>
+      </div>
+
+    </div>
     <div class="col-md-12">
-      <message :messages="messages" :key="watchKey" />
+      <message :messages="messages" :key="watchKey" @deleteMessage="deleteMessage"/>
     </div>
     <nav aria-label="Page navigation" class="offset-md-4">
       <paginate
@@ -19,7 +26,7 @@
           :click-handler="pageChangeHandler"
           />
     </nav>
-    <add-message/>
+    <add-message  @addedMessage="addedMessage"/>
   </div>
 </template>
 
@@ -31,7 +38,7 @@ import {mapGetters, mapActions} from 'vuex';
 export default {
   name: 'messages',
   components: {message, AddMessage},
-  computed: mapGetters(['messages', 'pageCount', 'watchKey']),
+  computed: mapGetters(['messages', 'pageCount']),
   data(){
     return {
       page: +this.$route.query.page || 1,
@@ -39,7 +46,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getByPage', 'fetchPageCount']),
+    ...mapActions(['getByPage', 'fetchPageCount', 'delete', 'storePage', 'justUpdateMessages']),
+    async deleteMessage(id) {
+      this.storePage(this.page-1);
+      this.delete(id);
+      this.fetchPageCount();
+    },
+    async addedMessage() {
+      this.storePage(this.page-1);
+      this.justUpdateMessages();
+      this.fetchPageCount();
+    },
     /**
      * Задает URL и запрашивает данные для страницы, на которой находимся
      * @param page
@@ -47,9 +64,7 @@ export default {
     pageChangeHandler(page) {
       this.$router.push(`${this.$route.path}?page=${page}`);
       this.getByPage(page-1);
-    },
-    incrementWatchKey() { //TODO возможно мусорная функция, убрать. когда пойму, что направление решения не верное
-      this.watchKey++;
+      this.fetchPageCount();
     }
   },
   async mounted() {
