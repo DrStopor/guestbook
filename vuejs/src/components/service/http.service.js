@@ -1,9 +1,9 @@
 import axios from "axios";
 import authService from "./auth.service";
 
-//const API_ENDPOINT = process.env.VUE_APP_API_ENDPOINT || 'http://localhost:8080/';
+const API_ENDPOINT = process.env.VUE_APP_API_ENDPOINT || 'http://localhost:8080/';
 let config = {
-    baseUrl: 'http://localhost:8080/api'
+    baseUrl: `${API_ENDPOINT}api/`
 };
 
 const httpClient = axios.create(config);

@@ -1,5 +1,7 @@
 import httpClient from "./http.service";
 
+const API_ENDPOINT = process.env.VUE_APP_API_ENDPOINT || 'http://localhost:8080/';
+
 /**
  * Created by TheCodeholic on 3/7/2020.
  */
@@ -12,7 +14,7 @@ const messagesService = {
      * @returns {Promise<AxiosResponse<any>>}
      */
     create(theme, user_name, text) {
-        return httpClient.post(`http://localhost:8080/api/message/save-message?theme=${theme}&author=${user_name}&text=${text}`)
+        return httpClient.post(`${API_ENDPOINT}api/message/save-message?theme=${theme}&author=${user_name}&text=${text}`)
     },
     /**
      * Получение от API контента для страницы
@@ -20,21 +22,21 @@ const messagesService = {
      * @returns {Promise<AxiosResponse<any>>}
      */
     get(page) {
-        return httpClient.get(`http://localhost:8080/api/message/get-by-page?page=${page}`);
+        return httpClient.get(`${API_ENDPOINT}api/message/get-by-page?page=${page}`);
     },
     /**
      * Получение от API кол-ва страниц
      * @returns {Promise<AxiosResponse<any>>}
      */
     getPagesCount() {
-        return httpClient.get('http://localhost:8080/api/message/pages-count');
+        return httpClient.get(`${API_ENDPOINT}api/message/pages-count`);
     },
     /**
      * Получение всех сообщений от API
      * @returns {Promise<AxiosResponse<any>>}
      */
     getAllMessage() {
-        return httpClient.get('http://localhost:8080/api/message/all');
+        return httpClient.get(`${API_ENDPOINT}api/message/all`);
     }
 };
 
