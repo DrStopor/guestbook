@@ -9,11 +9,6 @@ namespace app\models\query;
  */
 class MessageQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
     /**
      * {@inheritdoc}
      * @return \app\models\Message[]|array

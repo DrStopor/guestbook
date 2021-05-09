@@ -75,11 +75,16 @@ export default {
   },
   methods: {
     async submitForm($event) {
+      /**
+       * Проверяем валидацию полей
+       */
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
-
+      /**
+       * Пробуем сохранить сообщение
+       */
       try {
         const {status, data} = await messageService.create(this.theme, this.user_name, this.text);
         if (status === 200 && data.message === 'success') {
@@ -88,21 +93,6 @@ export default {
       } catch (e) {
         console.log(e.response);
       }
-    },
-    async saveMessage($event) {
-      let theme = $event.target.elements.theme.value;
-      let user_name = $event.target.elements.user_name.value;
-      let text = $event.target.elements.text.value;
-      try {
-        const {status, data} = await messageService.create(theme, user_name, text);
-        console.log(data);
-        if (status === 200 && data.message === 'success') {
-          $event.target.reset();
-        }
-      } catch (e) {
-        console.log(e.response);
-      }
-
     }
   }
 }

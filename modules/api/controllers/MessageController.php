@@ -30,11 +30,12 @@ class MessageController extends ActiveController
         return $behaviors;
     }
 
-    public function actionIndex()
-    {
-        return $this->renderContent('Hello');
-    }
-
+    /**
+     * Получение сообщений для переденной (нет) странице, с учетом кол-ва сообщений на страницу
+     * @param int $page
+     * @param int $limitMessage кол-во сообщений на страницу
+     * @return Message[]|array
+     */
     public function actionGetByPage($page = 0, $limitMessage = 3)
     {
         $model= Message::find()->select(['theme', 'user_name', 'text', 'created_time'])->offset($page*$limitMessage)->limit($limitMessage)->all();
@@ -42,6 +43,13 @@ class MessageController extends ActiveController
         return $model;
     }
 
+    /**
+     * Сохранение переданного сообщения по полям
+     * @param $theme
+     * @param null $author
+     * @param $text
+     * @return string[]
+     */
     public function actionSaveMessage($theme, $author = null, $text)
     {
         $message = new Message();
@@ -54,12 +62,20 @@ class MessageController extends ActiveController
         return ['error' => 'не удалось сохранить'];
     }
 
+    /**
+     * Кол-во страниц с сообщениями. Кол-во сообщений захардкожено
+     * @return int
+     */
     public function actionPagesCount() {
         $query = Message::find();
         $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 3]);
         return $pages->getPageCount();
     }
 
+    /**
+     * Получение всех записей сообщений
+     * @return Message[]|array
+     */
     public function actionAll()
     {
         return Message::find()->select(['id', 'theme', 'user_name', 'text', 'created_time'])->all();
@@ -74,8 +90,10 @@ class MessageController extends ActiveController
 
     public function prepareDataProvider()
     {
-        return new ActiveDataProvider([
+        return new ActiveDataProvider(
+            [
             'query' => $this->modelClass::find()->all()
-                                      ]);
+            ]
+        );
     }
 }

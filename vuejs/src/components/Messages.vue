@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="col-md-12">
-<!--      <message :messages="items" />-->
       <message :messages="messages" :key="watchKey" />
     </div>
     <nav aria-label="Page navigation" class="offset-md-4">
@@ -27,13 +26,10 @@
 <script>
 import AddMessage from "./AddMessage";
 import message from "./Message";
-//import messageService from "./service/message.service";
-//import paginationMixin from '../mixins/pagination.mixin';
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
   name: 'messages',
-  //mixins: [paginationMixin],
   components: {message, AddMessage},
   computed: mapGetters(['messages', 'pageCount', 'watchKey']),
   data(){
@@ -42,29 +38,21 @@ export default {
       watchKey: 0,
     }
   },
-  /*methods: {
-    async init() {
-      const {status, data} = await messageService.getAllMessage();
-      if (status === 200) {
-        this.messages = data;
-        this.setupPagination(data);
-      }
-    }
-  },*/
   methods: {
     ...mapActions(['getByPage', 'fetchPageCount']),
+    /**
+     * Задает URL и запрашивает данные для страницы, на которой находимся
+     * @param page
+     */
     pageChangeHandler(page) {
       this.$router.push(`${this.$route.path}?page=${page}`);
       this.getByPage(page-1);
     },
-    incrementWatchKey() {
+    incrementWatchKey() { //TODO возможно мусорная функция, убрать. когда пойму, что направление решения не верное
       this.watchKey++;
     }
   },
   async mounted() {
-    /*await this.init();*/
-    /*this.$store.dispatch('fetchMessages');*/
-    //this.fetchMessages();
     this.fetchPageCount();
     this.getByPage(this.page-1);
   }
